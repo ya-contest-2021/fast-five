@@ -1,8 +1,9 @@
 const callbackyWinners = require(".");
+const STREET_RACERS = ["Brian", "Mia", "Han", "Gisele", "Dominic"];
 
-async function winners(wait) {
+async function winners(wait, STREET_RACERS, N) {
   return await new Promise((fulfil) => {
-    callbackyWinners(wait, fulfil);
+    callbackyWinners(wait, fulfil, STREET_RACERS, N);
   });
 }
 
@@ -106,7 +107,7 @@ test("should work when no one cheats", async () => {
   ]);
 
   run();
-  const racers = await winners(wait);
+  const racers = await winners(wait, STREET_RACERS, 10);
 
   expect(racers).toEqual(["Gisele", "Dominic", "Brian"]);
 });
@@ -167,7 +168,7 @@ test("should handle connection lost", async () => {
   ]);
 
   run();
-  const racers = await winners(wait);
+  const racers = await winners(wait, STREET_RACERS, 10);
 
   expect(racers).toEqual(["Brian", "Mia", "Han"]);
 });
